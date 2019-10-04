@@ -13,7 +13,7 @@ function initialize_worker() {
 
     # Install pip3
     echo ======= Installing pip3 =======
-    sudo apt-get install -y python3-pip
+    apt-get install -y python3-pip
 }
 
 function setup_python_venv() {
@@ -24,7 +24,7 @@ function setup_python_venv() {
 
     # Create virtual environment and activate it
     echo ======== Creating and activating virtual env =======
-    virtualenv venv
+    cd ..
     source ./venv/bin/activate
 }
 
@@ -34,12 +34,12 @@ function clone_app_repository() {
     echo ======== Cloning and accessing project directory ========
     if [[ -d ~/demo_rest ]]; then
         sudo rm -rf ~/demo_rest
-        git clone -b master https://github.com/jerry-ban/demo.git ~/demo_rest
+        git clone -b feature https://github.com/jerry-ban/demo.git ~/demo_rest
         cd ~/demo_rest/
     else
         #git clone -b develop https://github.com/indungu/yummy-rest.git ~/yummy-rest
         #cd ~/yummy-rest/
-        git clone -b master https://github.com/jerry-ban/demo.git ~/demo_rest
+        git clone -b feature https://github.com/jerry-ban/demo.git ~/demo_rest
         cd ~/demo_rest/
     fi
 }
@@ -142,7 +142,7 @@ EOF'
     sudo chmod 664 /etc/systemd/system/demo_rest.service
     sudo systemctl daemon-reload
     sudo systemctl enable demo_rest.service
-    sudo systemctl start demo_rest.service
+    sudo systemctl start cd ...service
     sudo service demo_rest status
 }
 
