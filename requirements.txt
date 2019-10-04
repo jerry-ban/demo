@@ -11,7 +11,7 @@ itsdangerous==1.1.0
 Jinja2==2.10.1
 jsonschema==2.6.0
 MarkupSafe==1.1.1
-numpy==1.17.2
+numpy==1.16.5
 nlopt==2.6.1
 openapi-spec-validator==0.2.8
 python-dateutil==2.8.0
