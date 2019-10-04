@@ -142,7 +142,7 @@ EOF'
     sudo chmod 664 /etc/systemd/system/demo_rest.service
     sudo systemctl daemon-reload
     sudo systemctl enable demo_rest.service
-    sudo systemctl start service
+    sudo systemctl start demo_rest.service
     sudo service demo_rest status
 }
 
