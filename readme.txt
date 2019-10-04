@@ -1,7 +1,21 @@
+### default is served by Flask’s built in web server, good for development and debugging needs
+### and not recommended in production environment. Let’s install uWSGI and configure Nginx to do the heavy lifting.
+### to use nginx as server,
+
+sudo apt-get install build-essential python python-dev
+$ pip install uwsgi
+
+$ sudo apt-get install nginx
+$ sudo /etc/init.d/nginx start
+
+
 ### follow aws tutorial, create a new box with ubuntu linux,
 ### in aws ubuntu box: assume python3 installed already
 $ sudo apt-get update
-$ sudo apt-get install python3-pip
+$ sudo apt-get install -y python3-pip
+# above -y means automatic yes to promots
+### to get the original rep url:
+$ git config --get remote.origin.url
 ### in project,to create requirements.txt, to do this:
 $ git clone https://github.com/xxx/demo.git demo
 $ cd demo
