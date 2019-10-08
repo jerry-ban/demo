@@ -24,7 +24,8 @@ function setup_python_venv() {
 
     # Create virtual environment and activate it
     echo ======== Creating and activating virtual env =======
-    cd ..
+    cd~
+    virtualenv venv
     source ./venv/bin/activate
 }
 
