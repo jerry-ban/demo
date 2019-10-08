@@ -51,6 +51,7 @@ function setup_app() {
     # Install required packages
     echo ======= Installing required packages ========
     pip install -r requirements.txt
+    pip install connexion[swagger-ui]
 
 }
 
