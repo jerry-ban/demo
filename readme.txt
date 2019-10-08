@@ -1,7 +1,32 @@
 ### default is served by Flask’s built in web server, good for development and debugging needs
-### and not recommended in production environment. Let’s install uWSGI and configure Nginx to do the heavy lifting.
-### to use nginx as server,
+### and not recommended in production environment.
+### Let’s install uWSGI and configure Nginx to do the heavy lifting; or use apache web server
+### to use Apache, best way to do is using mod_wsgi from in Apache web server
+Example: if flask app is in /var/www/api/app.py
+Apache configuration (/etc/apache2/sites-enabled/500-api.conf)
 
+WSGIDaemonProcess app threads=5 home=/var/www/api/
+ WSGIScriptAlias /api /var/www/api/app.wsgi
+
+ <directory /var/www/api/>
+ WSGIProcessGroup app
+ WSGIApplicationGroup %{GLOBAL}
+ WSGIScriptReloading On
+ Order deny,allow
+ Allow from all
+</directory>
+
+WSGI File - Calling your flask app (/var/www/api/app.wsgi)
+
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import sys
+sys.path.append('/var/www/api')
+from app import app as application
+
+
+### to use nginx as server,
 sudo apt-get install build-essential python python-dev
 $ pip install uwsgi
 

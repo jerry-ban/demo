@@ -43,7 +43,7 @@ class nlopt_examples:
         if grad.size > 0:
             grad[0] = 0.0
             grad[1] = 0.5 / pow(x[1], 0.5)
-        print(".", end="")
+        print(".")
         return pow(x[1], 0.5)
 
     def _official_myconstraint(self, x, grad, a, b):
