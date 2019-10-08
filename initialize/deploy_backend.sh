@@ -27,6 +27,8 @@ function setup_python_venv() {
     cd~
     virtualenv venv
     source ./venv/bin/activate
+
+    # export LD_LIBRARY_PATH= /home/ubuntu/.local/lib/python3.6/site-packages/
 }
 
 function clone_app_repository() {
@@ -118,7 +120,7 @@ function create_launch_script () {
     source /home/ubuntu/.env
     source /home/ubuntu/venv/bin/activate
     pip show flask
-    gunicorn run:application
+    gunicorn run:app
 EOF
     sudo chmod 744 /home/ubuntu/launch.sh
     echo ====== Ensuring script is executable =======

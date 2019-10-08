@@ -3,6 +3,27 @@ import numpy as np
 import nlopt
 import logging
 
+class nlopt_examples_dummy :
+    def __init__(self):
+        self.status = -999
+        self.dummy_result = [{"optId": 1, "title": "official example", "type": "no linear optimization"},
+                  {"optId": 2, "title": "time-consuming example", "type": "custom examples"},
+                  {"optId": 3, "title": "time-consuming example with queue", "type": "custom examples"}
+                  ]
+        pass
+
+    def get_all_examples(self):
+        return self.dummy_result
+
+    def run_offcial_example(self):
+        return self.dummy_result
+
+    def run_simple_example(self):
+        return self.dummy_result
+
+    def run_very_long_example(self):
+        return self.dummy_result
+
 class nlopt_examples:
     def __init__(self):
         self.status = -999
