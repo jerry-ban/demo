@@ -35,15 +35,15 @@ function clone_app_repository() {
     printf "***************************************************\n\t\tFetching App \n***************************************************\n"
     # Clone and access project directory
     echo ======== Cloning and accessing project directory ========
-    if [[ -d ~/demo_rest ]]; then
-        sudo rm -rf ~/demo_rest
-        git clone -b feature https://github.com/jerry-ban/demo.git ~/demo_rest
-        cd ~/demo_rest/
+    if [[ -d /home/ubuntu/demo_rest ]]; then
+        sudo rm -rf /home/ubuntu/demo_rest
+        git clone -b feature https://github.com/jerry-ban/demo.git /home/ubuntu/demo_rest
+        cd /home/ubuntu/demo_rest/
     else
         #git clone -b develop https://github.com/indungu/yummy-rest.git ~/yummy-rest
         #cd ~/yummy-rest/
-        git clone -b feature https://github.com/jerry-ban/demo.git ~/demo_rest
-        cd ~/demo_rest/
+        git clone -b feature https://github.com/jerry-ban/demo.git /home/ubuntu/demo_rest
+        cd /home/ubuntu/demo_rest/
     fi
 }
 
@@ -60,14 +60,14 @@ function setup_app() {
 # Create and Export required environment variable
 function setup_env() {
     echo ======= Exporting the necessary environment variables ========
-    sudo cat > ~/.env << EOF
+    sudo cat > /home/ubuntu/.env << EOF
     export DATABASE_URL="postgres://budufkitteymek:095f0029056c313190744c68ca69d19a2e315483bc41e059b40d6d9fdccf2599@ec2-107-22-229-213.compute-1.amazonaws.com:5432/d2r8p5ai580nqq"
     export APP_CONFIG="production"
     export SECRET_KEY="mYd3rTyL!tTl#sEcR3t"
     export FLASK_APP=run.py
 EOF
     echo ======= Exporting the necessary environment variables ========
-    source ~/.env
+    source /home/ubuntu/.env
 }
 
 # Install and configure nginx
@@ -124,7 +124,7 @@ function create_launch_script () {
 EOF
     sudo chmod 744 /home/ubuntu/launch.sh
     echo ====== Ensuring script is executable =======
-    ls -la ~/launch.sh
+    ls -la /home/ubuntu/launch.sh
 }
 
 function configure_startup_service () {
