@@ -120,10 +120,11 @@ function create_launch_script () {
     #!/bin/bash
     cd /home/ubuntu/demo_rest
     source /home/ubuntu/.env
+    echo *** inside launch***
     which python
     python --version
     source /home/ubuntu/venv/bin/activate
-    pip3 show flask
+    pip show flask
     which python
     python --version
     gunicorn run:app
@@ -151,6 +152,7 @@ function configure_startup_service () {
 EOF'
     echo ****change mode****
     which python
+    source /home/ubuntu/venv/bin/activate
     sudo chmod 664 /etc/systemd/system/demo_rest.service
     sudo systemctl daemon-reload
     sudo systemctl enable demo_rest.service
@@ -162,7 +164,10 @@ EOF'
 # Serve the web app through gunicorn
 function launch_app() {
     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
+    which python
+    echo *** launch now ***
     sudo bash /home/ubuntu/launch.sh
+    echo *** launch exit ***
 }
 
 ######################################################################
