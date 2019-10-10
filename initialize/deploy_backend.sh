@@ -53,6 +53,7 @@ function setup_app() {
     # Install required packages
     echo ======= Installing required packages ========
     pip3 install -r requirements.txt
+    pip3 uninstall -y connexion
     pip3 install connexion[swagger-ui]
     apt-get install -y gunicorn
 
