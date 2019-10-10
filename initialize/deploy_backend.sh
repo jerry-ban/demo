@@ -120,10 +120,12 @@ function create_launch_script () {
     #!/bin/bash
     cd /home/ubuntu/demo_rest
     source /home/ubuntu/.env
-    python --version
     which python
-    #source /home/ubuntu/venv/bin/activate
+    python --version
+    source /home/ubuntu/venv/bin/activate
     pip3 show flask
+    which python
+    python --version
     gunicorn run:app
 EOF
     sudo chmod 744 /home/ubuntu/launch.sh
@@ -147,12 +149,14 @@ function configure_startup_service () {
     [Install]
     WantedBy=multi-user.target
 EOF'
-
+    echo ****change mode****
+    which python
     sudo chmod 664 /etc/systemd/system/demo_rest.service
     sudo systemctl daemon-reload
     sudo systemctl enable demo_rest.service
     sudo systemctl start demo_rest.service
     sudo service demo_rest status
+    which python
 }
 
 # Serve the web app through gunicorn
