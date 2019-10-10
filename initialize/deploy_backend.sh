@@ -52,8 +52,8 @@ function setup_app() {
     setup_env
     # Install required packages
     echo ======= Installing required packages ========
-    pip install -r requirements.txt
-    pip install connexion[swagger-ui]
+    pip3 install -r requirements.txt
+    pip3 install connexion[swagger-ui]
 
 }
 
@@ -119,7 +119,7 @@ function create_launch_script () {
     cd /home/ubuntu/demo_rest
     source /home/ubuntu/.env
     source /home/ubuntu/venv/bin/activate
-    pip show flask
+    pip3 show flask
     gunicorn run:app
 EOF
     sudo chmod 744 /home/ubuntu/launch.sh
