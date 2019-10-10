@@ -9,7 +9,7 @@ www_server = "flask" if deployment_env=="development" else "tornado"
 app = connexion.FlaskApp(__name__, specification_dir='openapi/')
 app.add_api('my_api.yaml', arguments={'title': 'Optimizion Demo Service'})
 
-applilcation = app.app  # used for the wsgi
+application = app.app  # used for the wsgi
 
 if __name__ == '__main__':
     app.run(port=port_number, server= www_server, debug=True)
