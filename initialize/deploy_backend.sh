@@ -26,7 +26,7 @@ function setup_python_venv() {
     echo ======== Creating and activating virtual env =======
     cd /home/ubuntu
     virtualenv venv
-    source ./venv/bin/activate
+    source home/ubuntu/venv/bin/activate
 
     # export LD_LIBRARY_PATH= /home/ubuntu/.local/lib/python3.6/site-packages/
 }
