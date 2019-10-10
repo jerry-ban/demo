@@ -14,6 +14,8 @@ function initialize_worker() {
     # Install pip3
     echo ======= Installing pip3 =======
     sudo apt-get install -y python3-pip
+    sudo apt-get install -y python3-dev
+    sudo apt-get install nginx
 }
 
 function setup_python_venv() {
@@ -120,7 +122,7 @@ function create_launch_script () {
     #!/bin/bash
     cd /home/ubuntu/demo_rest
     source /home/ubuntu/.env
-    echo *** inside launch***
+    echo ###inside launch###
     which python
     python --version
     source /home/ubuntu/venv/bin/activate
