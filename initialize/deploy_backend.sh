@@ -120,6 +120,8 @@ function create_launch_script () {
     #!/bin/bash
     cd /home/ubuntu/demo_rest
     source /home/ubuntu/.env
+    python --version
+    which python
     #source /home/ubuntu/venv/bin/activate
     pip3 show flask
     gunicorn run:app
