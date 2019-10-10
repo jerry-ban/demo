@@ -133,7 +133,7 @@ function create_launch_script () {
     pip show flask
     which python
     python --version
-    /home/ubuntu/venv/bin/gunicorn run:application
+    /home/ubuntu/venv/bin/gunicorn run:app
 EOF
     sudo chmod 744 /home/ubuntu/launch.sh
     echo ====== Ensuring script is executable =======
