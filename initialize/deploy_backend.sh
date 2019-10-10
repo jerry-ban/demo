@@ -60,8 +60,8 @@ function setup_app() {
     pip install -r requirements.txt
     pip uninstall -y connexion
     python --version
-    pip install connexion[swagger-ui]
-    apt-get install -y gunicorn
+    pip3 install connexion[swagger-ui]
+    pip3 install -I gunicorn  # force to install gunicorn to current venv folder. not use  apt-get install -y gunicorn
 }
 
 # Create and Export required environment variable
@@ -98,8 +98,8 @@ function setup_nginx() {
 
             location / {
                     # reverse proxy and serve the app
-                    # running on the localhost:8000
-                    proxy_pass http://127.0.0.1:8000/;
+                    # running on the localhost:8831
+                    proxy_pass http://127.0.0.1:8831/;
                     proxy_set_header HOST \$host;
                     proxy_set_header X-Forwarded-Proto \$scheme;
                     proxy_set_header X-Real-IP \$remote_addr;
@@ -133,7 +133,7 @@ function create_launch_script () {
     pip show flask
     which python
     python --version
-    gunicorn run:app
+    /home/ubuntu/venv/gunicorn run:application
 EOF
     sudo chmod 744 /home/ubuntu/launch.sh
     echo ====== Ensuring script is executable =======
@@ -171,9 +171,9 @@ EOF'
 function launch_app() {
     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
     which python
-    printf "***calling launch.sh now\n"
+    printf "***calling launch.sh now***\n"
     sudo bash /home/ubuntu/launch.sh
-    printf "***finish calling launch.sh\n"
+    printf "***finish calling launch.sh***\n"
 }
 
 ######################################################################
