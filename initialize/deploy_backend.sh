@@ -26,8 +26,8 @@ function setup_python_venv() {
     echo ======== Creating and activating virtual env =======
     cd /home/ubuntu
     virtualenv venv
-    source home/ubuntu/venv/bin/activate
-
+    source /home/ubuntu/venv/bin/activate
+    python --version
     # export LD_LIBRARY_PATH= /home/ubuntu/.local/lib/python3.6/site-packages/
 }
 
@@ -52,9 +52,9 @@ function setup_app() {
     setup_env
     # Install required packages
     echo ======= Installing required packages ========
-    pip3 install -r requirements.txt
-    pip3 uninstall -y connexion
-    pip3 install connexion[swagger-ui]
+    pip install -r requirements.txt
+    pip uninstall -y connexion
+    pip install connexion[swagger-ui]
     apt-get install -y gunicorn
 
 }
