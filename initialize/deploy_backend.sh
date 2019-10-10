@@ -32,7 +32,6 @@ function setup_python_venv() {
     #python3 -m venv venv
 
     source /home/ubuntu/venv/bin/activate
-    python --version
     # export LD_LIBRARY_PATH= /home/ubuntu/.local/lib/python3.6/site-packages/
 }
 
@@ -59,7 +58,6 @@ function setup_app() {
     echo ======= Installing required packages ========
     pip install -r requirements.txt
     pip uninstall -y connexion
-    python --version
     pip3 install connexion[swagger-ui]
     pip3 install -I gunicorn  # force to install gunicorn to current venv folder. not use  apt-get install -y gunicorn
 }
@@ -124,21 +122,14 @@ function create_launch_script () {
     sudo cat > /home/ubuntu/launch.sh <<EOF
     #!/bin/bash
     cd /home/ubuntu/demo_rest
-    pwd
     source /home/ubuntu/.env
-    printf "***inside launch.sh***\n"
-    which python
-    python --version
     source /home/ubuntu/venv/bin/activate
     pip show flask
-    which python
-    python --version
-    /home/ubuntu/venv/bin/gunicorn run:app
+    /home/ubuntu/venv/bin/gunicorn -b :8831 run:app
 EOF
     sudo chmod 744 /home/ubuntu/launch.sh
     echo ====== Ensuring script is executable =======
     ls -la /home/ubuntu/launch.sh
-    python --version
 }
 
 function configure_startup_service () {
@@ -156,24 +147,19 @@ function configure_startup_service () {
     [Install]
     WantedBy=multi-user.target
 EOF'
-    echo ****change mode****
-    which python
+
     source /home/ubuntu/venv/bin/activate
     sudo chmod 664 /etc/systemd/system/demo_rest.service
     sudo systemctl daemon-reload
     sudo systemctl enable demo_rest.service
     sudo systemctl start demo_rest.service
     sudo service demo_rest status
-    which python
 }
 
 # Serve the web app through gunicorn
 function launch_app() {
     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
-    which python
-    printf "***calling launch.sh now***\n"
     sudo bash /home/ubuntu/launch.sh
-    printf "***finish calling launch.sh***\n"
 }
 
 ######################################################################
