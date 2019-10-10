@@ -54,9 +54,9 @@ function setup_app() {
     echo ======= Installing required packages ========
     pip install -r requirements.txt
     pip uninstall -y connexion
+    python --version
     pip install connexion[swagger-ui]
     apt-get install -y gunicorn
-
 }
 
 # Create and Export required environment variable
@@ -120,13 +120,14 @@ function create_launch_script () {
     #!/bin/bash
     cd /home/ubuntu/demo_rest
     source /home/ubuntu/.env
-    source /home/ubuntu/venv/bin/activate
+    #source /home/ubuntu/venv/bin/activate
     pip3 show flask
     gunicorn run:app
 EOF
     sudo chmod 744 /home/ubuntu/launch.sh
     echo ====== Ensuring script is executable =======
     ls -la /home/ubuntu/launch.sh
+    python --version
 }
 
 function configure_startup_service () {
