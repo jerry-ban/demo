@@ -124,8 +124,9 @@ function create_launch_script () {
     sudo cat > /home/ubuntu/launch.sh <<EOF
     #!/bin/bash
     cd /home/ubuntu/demo_rest
+    pwd
     source /home/ubuntu/.env
-    echo ###inside launch###
+    printf "***inside launch.sh***\n"
     which python
     python --version
     source /home/ubuntu/venv/bin/activate
@@ -170,9 +171,9 @@ EOF'
 function launch_app() {
     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
     which python
-    echo *** launch now ***
+    printf "***calling launch.sh now\n"
     sudo bash /home/ubuntu/launch.sh
-    echo *** launch exit ***
+    printf "***finish calling launch.sh\n"
 }
 
 ######################################################################
