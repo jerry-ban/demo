@@ -125,7 +125,7 @@ function create_launch_script () {
     source /home/ubuntu/.env
     source /home/ubuntu/venv/bin/activate
     pip show flask
-    /home/ubuntu/venv/bin/gunicorn -b :8831 run:app
+    /home/ubuntu/venv/bin/gunicorn -b :8831 run:application
 EOF
     sudo chmod 744 /home/ubuntu/launch.sh
     echo ====== Ensuring script is executable =======
