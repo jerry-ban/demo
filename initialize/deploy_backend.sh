@@ -13,7 +13,7 @@ function initialize_worker() {
 
     # Install pip3
     echo ======= Installing pip3 =======
-    apt-get install -y python3-pip
+    sudo apt-get install -y python3-pip
 }
 
 function setup_python_venv() {
@@ -24,7 +24,7 @@ function setup_python_venv() {
 
     # Create virtual environment and activate it
     echo ======== Creating and activating virtual env =======
-    cd~
+    cd /home/ubuntu
     virtualenv venv
     source ./venv/bin/activate
 
