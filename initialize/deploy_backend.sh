@@ -28,8 +28,8 @@ function setup_python_venv() {
     echo ======== Creating and activating virtual env =======
     cd /home/ubuntu
 
-    virtualenv venv #this is for python2
-    #python3 -m venv venv
+    virtualenv venv
+    #python3 -m venv venv  #this is for python3 only
 
     source /home/ubuntu/venv/bin/activate
     # export LD_LIBRARY_PATH= /home/ubuntu/.local/lib/python3.6/site-packages/
@@ -70,6 +70,8 @@ function setup_env() {
     export APP_CONFIG="production"
     export SECRET_KEY="mYd3rTyL!tTl#sEcR3t"
     export FLASK_APP=run.py
+    export PORT_NUMBER=8831
+    export DEPLOY_ENV=8831
 EOF
     echo ======= Exporting the necessary environment variables ========
     source /home/ubuntu/.env

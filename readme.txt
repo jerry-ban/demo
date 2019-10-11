@@ -26,8 +26,9 @@ sys.path.append('/var/www/api')
 from app import app as application
 
 
-### to use nginx as server,
+### to use nginx as server, for python2 and 3
 sudo apt-get install build-essential python python-dev
+sudo apt-get install build-essential python3 python3-dev
 $ pip install uwsgi
 
 $ sudo apt-get install nginx
