@@ -1,0 +1,5 @@
+some common linux commands:
+
+sudo ps -ef | mysearchtext
+lsof -i :8831 | grep gunicorn
+sudo kill -9 PID
