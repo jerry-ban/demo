@@ -6,10 +6,11 @@ from logging.handlers import RotatingFileHandler
 
 log_file_name = "demo_rest.log"
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO,filename = log_file_name)
 #logging.basicConfig(level=logging.INFO, filename="demo_rest.log")
-new_log_handler = RotatingFileHandler(log_file_name, maxBytes=5*1024*1024, backupCount=5)
-logging.getLogger().addHandler(new_log_handler )
+#new_log_handler = RotatingFileHandler(log_file_name, maxBytes=5*1024*1024, backupCount=5)
+new_log_handler = RotatingFileHandler(log_file_name, maxBytes=5*1024, backupCount=5)
+#logging.getLogger().addHandler(new_log_handler )
 
 port_number = int(os.getenv("PORT_NUMBER", 8831))
 deployment_env = os.getenv("DEPLOY_ENV", "development")
@@ -22,7 +23,7 @@ application = app.app  # used for the wsgi
 application.logger.addHandler(new_log_handler )
 
 if __name__ == '__main__':
-    application.logger.handlers=[]
-    logging.basicConfig(filename=log_file_name)
+    #application.logger.handlers=[]
+    #logging.basicConfig(filename=log_file_name)
     app.run(port=port_number, server= www_server, debug=True)
     #app.run(threaded=False, processes = 3, port=port_number, debug=True)
