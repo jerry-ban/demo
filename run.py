@@ -8,7 +8,7 @@ log_file_name = "demo_rest.log"
 
 logging.basicConfig(level=logging.INFO)
 #logging.basicConfig(level=logging.INFO, filename="demo_rest.log")
-new_log_handler = RotatingFileHandler(log_file_name, maxBytes=5 * 1024, backupCount=5)
+new_log_handler = RotatingFileHandler(log_file_name, maxBytes=5*1024*1024, backupCount=5)
 logging.getLogger().addHandler(new_log_handler )
 
 port_number = int(os.getenv("PORT_NUMBER", 8831))
