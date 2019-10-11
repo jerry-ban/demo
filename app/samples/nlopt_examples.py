@@ -2,6 +2,7 @@
 import numpy as np
 import nlopt
 import logging
+from datetime import datetime
 
 class nlopt_examples_dummy :
     def __init__(self):
@@ -48,24 +49,31 @@ class nlopt_examples:
         opt.add_inequality_constraint(lambda x, grad: self._official_myconstraint(x, grad, 2, 0), 1e-8)
         opt.add_inequality_constraint(lambda x, grad: self._official_myconstraint(x, grad, -1, 1), 1e-8)
         opt.set_xtol_rel(1e-4)
-        print("\noptimization starts!")
-        x = opt.optimize([1.234, 5.678])
-        print("\noptimization finished!\n")
+        logging.info("optimization starts!")
+        x0 = [1.234, 5.678]
+        self.iter_counter = 0
+        x = opt.optimize(x0)
+        logging.info("optimization finished!")
         minf = opt.last_optimum_value()
         status=opt.last_optimize_result()
-        print("optimum at ", x[0], x[1])
-        print("minimum value = ", minf)
-        print("result code = ", status)
+        logging.info("optimum at %s %s " % (x[0], x[1]))
+        logging.info("minimum value = %s" % minf)
+        logging.info("result code = %s" % status)
         result = {"variableList": [{"id": 0, "name": "x1", "value": x[0] }, {"id": 1, "name": "x2", "value": x[1] }]
                   , "objectiveValue": minf, "optStatusCode": status }
         return result
 
     def _official_myfunc(self, x, grad):
+        warning_msg = ""
+        self.iter_counter +=1
         if grad.size > 0:
             grad[0] = 0.0
             grad[1] = 0.5 / pow(x[1], 0.5)
-        print(".")
-        return pow(x[1], 0.5)
+            obj_value = pow(x[1], 0.5)
+            logging.info("{0:%Y-%m-%d %H:%M:%S} iter: {1:05d} {2:12.5f}{3}".format(datetime.now(), self.iter_counter,
+                                                                               obj_value, warning_msg))
+
+        return obj_value
 
     def _official_myconstraint(self, x, grad, a, b):
         if grad.size > 0:
