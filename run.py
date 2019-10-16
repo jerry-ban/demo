@@ -4,7 +4,7 @@ import os
 import logging
 from logging.handlers import RotatingFileHandler
 
-log_file_name = "demo_rest.log"
+log_file_name = "/var/log/demo_rest.log"
 
 logging.basicConfig(level=logging.INFO,filename = log_file_name)
 #logging.basicConfig(level=logging.INFO, filename="demo_rest.log")
