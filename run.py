@@ -3,8 +3,15 @@ import connexion
 import os
 import logging
 from logging.handlers import RotatingFileHandler
+import shutil
 
 log_file_name = "/var/log/demo_rest.log"
+
+shutil.chown(log_file_name, user="ubuntu")
+# uid = pwd.getpwnam("nobody").pw_uid
+# gid = grp.getgrnam("nogroup").gr_gid
+# os.chown(log_file_name, uid, gid)
+
 
 logging.basicConfig(level=logging.INFO,filename = log_file_name)
 #logging.basicConfig(level=logging.INFO, filename="demo_rest.log")
