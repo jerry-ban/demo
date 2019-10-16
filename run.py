@@ -7,7 +7,7 @@ import shutil
 
 log_file_name = "/var/log/demo_rest.log"
 
-shutil.chown(log_file_name, user="ubuntu")
+
 # uid = pwd.getpwnam("nobody").pw_uid
 # gid = grp.getgrnam("nogroup").gr_gid
 # os.chown(log_file_name, uid, gid)
@@ -17,6 +17,7 @@ logging.basicConfig(level=logging.INFO,filename = log_file_name)
 #logging.basicConfig(level=logging.INFO, filename="demo_rest.log")
 #new_log_handler = RotatingFileHandler(log_file_name, maxBytes=5*1024*1024, backupCount=5)
 new_log_handler = RotatingFileHandler(log_file_name, maxBytes=5*1024, backupCount=5)
+shutil.chown(log_file_name, user="ubuntu")
 #logging.getLogger().addHandler(new_log_handler )
 
 port_number = int(os.getenv("PORT_NUMBER", 8831))
