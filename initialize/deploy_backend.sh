@@ -161,7 +161,7 @@ EOF'
 function setup_log(){
 printf "***************************************************\n\t\tSetup Log \n***************************************************\n"
 LOG_FILE_FULL=/var/log/demo_rest.log
-if [ ! -f ${LOG_FILE} ]; then
+if [ ! -f ${LOG_FILE_FULL} ]; then
     sudo touch ${LOG_FILE_FULL}
     sudo chmod 777 ${LOG_FILE_FULL}
     sudo chown ubuntu ${LOG_FILE_FULL}
