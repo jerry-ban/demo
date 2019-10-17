@@ -14,7 +14,7 @@ log_file_name = "/var/log/demo_rest.log"
 
 
 logging.basicConfig(level=logging.INFO,filename = log_file_name)
-shutil.chown(log_file_name, user="ubuntu")
+#shutil.chown(log_file_name, user="ubuntu")
 #logging.basicConfig(level=logging.INFO, filename="demo_rest.log")
 #new_log_handler = RotatingFileHandler(log_file_name, maxBytes=5*1024*1024, backupCount=5)
 new_log_handler = RotatingFileHandler(log_file_name, maxBytes=5*1024, backupCount=5)
