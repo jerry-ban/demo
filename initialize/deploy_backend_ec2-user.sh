@@ -1,11 +1,12 @@
 #!/usr/bin/bash
 DEPLOY_USER="ec2-user"
+INATALLCMD=yum
 
 function initialize_worker() {
     printf "***************************************************\n\t\tSetting up host \n***************************************************\n"
     # Update packages
     echo ======= Updating packages ========
-    sudo apt-get update
+    sudo ${INATALLCMD} update
 
     # Export language locale settings
     echo ======= Exporting language locale settings =======
@@ -14,9 +15,9 @@ function initialize_worker() {
 
     # Install pip3
     echo ======= Installing pip3 =======
-    sudo apt-get install -y python3-pip
-    sudo apt-get install -y python3-dev
-    sudo apt-get install nginx
+    sudo ${INATALLCMD} install -y python3-pip
+    sudo ${INATALLCMD} install -y python3-dev
+    sudo ${INATALLCMD} install nginx
 }
 
 function setup_python_venv() {
@@ -179,7 +180,7 @@ function launch_app() {
 ######################################################################
 ########################      RUNTIME       ##########################
 ######################################################################
-
+function final(){
 initialize_worker
 setup_python_venv
 clone_app_repository
@@ -189,3 +190,4 @@ create_launch_script
 configure_startup_service
 setup_log
 launch_app
+}
