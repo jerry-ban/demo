@@ -159,12 +159,12 @@ EOF'
 }
 
 function setup_log(){
-
-if [ ! -f /var/log/demo_rest.log ]; then
-    sudo touch /var/log/demo_rest.log
-    sudo chmod 777 /var/log/demo_rest.log
-    sudo chown ubuntu /var/log/demo_rest.log
-    sudo chgrp ubuntu /var/log/demo_rest.log
+LOG_FILE = /var/log/demo_rest.log
+if [ ! -f ${LOG_FILE} ]; then
+    sudo touch ${LOG_FILE}
+    sudo chmod 777 ${LOG_FILE}
+    sudo chown ubuntu ${LOG_FILE}
+    sudo chgrp ubuntu ${LOG_FILE}
 fi
 
 }
