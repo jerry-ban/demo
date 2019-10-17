@@ -159,6 +159,7 @@ EOF'
 }
 
 function setup_log(){
+printf "***************************************************\n\t\tSetup Log \n***************************************************\n"
 LOG_FILE = /var/log/demo_rest.log
 if [ ! -f ${LOG_FILE} ]; then
     sudo touch ${LOG_FILE}
