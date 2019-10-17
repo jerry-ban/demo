@@ -158,6 +158,16 @@ EOF'
     sudo service demo_rest status
 }
 
+function setup_log(){
+
+if [ ! -f /var/log/demo_rest.log ]; then
+    sudo touch /var/log/demo_rest.log
+    sudo chmod 777 /var/log/demo_rest.log
+    sudo chown ubuntu /var/log/demo_rest.log
+    sudo chgrp ubuntu /var/log/demo_rest.log
+fi
+
+}
 # Serve the web app through gunicorn
 function launch_app() {
     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
@@ -175,4 +185,5 @@ setup_app
 setup_nginx
 create_launch_script
 configure_startup_service
+setup_log
 launch_app
