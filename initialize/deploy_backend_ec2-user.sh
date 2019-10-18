@@ -15,23 +15,23 @@ function initialize_worker() {
 
     # Install pip3
     echo ======= Installing pip3 =======
+    sudo ${INATALLCMD} install -y git
     sudo ${INATALLCMD} install -y python3-pip
     sudo ${INATALLCMD} install -y python3-dev
-    sudo ${INATALLCMD} install nginx
 }
 
 function setup_python_venv() {
     printf "***************************************************\n\t\tSetting up Venv \n***************************************************\n"
     # Install virtualenv
     echo ======= Installing virtualenv =======
-    pip3 install virtualenv
+    #pip3 install virtualenv
 
     # Create virtual environment and activate it
     echo ======== Creating and activating virtual env =======
     cd /home/${DEPLOY_USER}
 
-    virtualenv venv
-    #python3 -m venv venv  #this is for python3 only
+    #virtualenv venv
+    python3 -m venv venv  #this is for python3 only
 
     source /home/${DEPLOY_USER}/venv/bin/activate
     # export LD_LIBRARY_PATH= /home/ubuntu/.local/lib/python3.6/site-packages/
@@ -43,12 +43,12 @@ function clone_app_repository() {
     echo ======== Cloning and accessing project directory ========
     if [[ -d /home/${DEPLOY_USER}/demo_rest ]]; then
         sudo rm -rf /home/${DEPLOY_USER}/demo_rest
-        git clone -b feature https://github.com/jerry-ban/demo.git /home/${DEPLOY_USER}/demo_rest
+        git clone -b 03_aws_app https://github.com/jerry-ban/demo.git /home/${DEPLOY_USER}/demo_rest
         cd /home/${DEPLOY_USER}/demo_rest/
     else
         #git clone -b develop https://github.com/indungu/yummy-rest.git ~/yummy-rest
         #cd ~/yummy-rest/
-        git clone -b feature https://github.com/jerry-ban/demo.git /home/${DEPLOY_USER}/demo_rest
+        git clone -b feature htpiptps://github.com/jerry-ban/demo.git /home/${DEPLOY_USER}/demo_rest
         cd /home/${DEPLOY_USER}/demo_rest/
     fi
 }
@@ -58,10 +58,11 @@ function setup_app() {
     setup_env
     # Install required packages
     echo ======= Installing required packages ========
+    pip install --upgrade pip
     pip install -r requirements.txt
     pip uninstall -y connexion
-    pip3 install connexion[swagger-ui]
-    pip3 install -I gunicorn  # force to install gunicorn to current venv folder. not use  apt-get install -y gunicorn
+    pip install connexion[swagger-ui]
+    pip install -I gunicorn  # force to install gunicorn to current venv folder. not use  apt-get install -y gunicorn
 }
 
 # Create and Export required environment variable
@@ -83,7 +84,10 @@ EOF
 function setup_nginx() {
     printf "***************************************************\n\t\tSetting up nginx \n***************************************************\n"
     echo ======= Installing nginx =======
-    sudo apt-get install -y nginx
+    sudo ${INATALLCMD} install -y nginx
+
+     sudo service apache2 stop
+     sudo service nginx reload
 
     # Configure nginx routing
     echo ======= Configuring nginx =======
