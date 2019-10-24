@@ -1,0 +1,138 @@
+###*******************************How To Install and Use Docker on Ubuntu 18.04 *******************************###
+#https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+
+# Docker supports only x86_64 (64-bit architecture). It also required Linux kernel version 3.8 and above, use following cmd to find:
+uname -ir
+
+###Step 1  Installing Docker
+# First, update your existing list of packages:
+sudo apt update
+
+# Next, install a few prerequisite packages which let apt use packages over HTTPS:
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+
+# Then add the GPG key for the official Docker repository to your system:
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+# Add the Docker repository to APT sources:
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+
+# Next, update the package database with the Docker packages from the newly added repo:
+sudo apt update
+
+# Make sure you are about to install from the Docker repo instead of the default Ubuntu repo:
+apt-cache policy docker-ce
+
+# Notice that docker-ce is not installed, but the candidate for installation is from the Docker repository for Ubuntu 18.04 (bionic).
+# Finally, install Docker:
+sudo apt install docker-ce
+
+#Docker should now be installed, the daemon started, and the process enabled to start on boot. Check that it’s running:
+sudo systemctl status docker
+
+
+#Installing Docker now gives you not just the Docker service (daemon) but also the docker command line utility, or the Docker client. We’ll explore how to use the docker command later in this tutorial.
+###Step 2  Executing the Docker Command Without Sudo (Optional)
+#By default, the docker command can only be run the root user or by a user in the docker group, which is automatically created during Docker’s installation process. If you attempt to run the docker command without prefixing it with sudo or without being in the docker group, you’ll get an output like this:
+#If you want to avoid typing sudo whenever you run the docker command, add your username to the docker group:
+sudo usermod -aG docker ${USER}
+
+#To apply the new group membership, log out of the server and back in, or type the following:
+su - ${USER}
+
+# Confirm that your user is now added to the docker group by typing:
+id -nG
+
+
+###Step 3  Using the Docker Command
+# docker [option] [command] [arguments]
+
+# find the actual information(location, size...) about the docker isntallation
+docker info
+
+
+###Step 4  Working with Docker Images
+
+#to check whether you can access and download images from Docker Hub, type:
+docker run hello-world
+
+#you can search for images available on Docker Hub by using the docker command with the search subcommand. For example, to search for the Ubuntu image, type:
+docker search ubuntu
+
+#Execute the following command to download the official ubuntu image to your computer:
+docker pull ubuntu
+
+# To see the images that have been downloaded to your computer, type:
+docker images
+
+
+###Step 5  Running a Docker Container
+# As an example, let’s run a container using the latest image of Ubuntu. The combination of the -i and -t switches gives you interactive shell access into the container:
+docker run -it ubuntu
+
+# the you are working inside the container, and run any conmmnand inside the container only as root user., like:
+apt update
+apt install nodejs
+node -v
+
+#to exit the container, type
+exit
+
+
+###Step 6  Managing Docker Containers
+#After using Docker for a while, you’ll have many active (running) and inactive containers on your computer. To view the active ones, use:
+docke ps
+
+#To view all containers  active and inactive, run docker ps with the -a switch:
+docker ps -a
+
+#To view the latest container you created, pass it the -l switch:
+docker ps -l
+
+#To start a stopped container, use docker start, followed by the container ID or the container’s name.
+docker start cf0f3ca922e0
+
+#To stop a running container, use docker stop, followed by the container ID or name
+docker stop cf0f3ca922e0
+
+#Once you’ve decided you no longer need a container anymore, remove it with the docker rm command, again using either the container ID or the name. Use the docker ps -a command to find the container ID or name for the container associated with the hello-world image and remove it.
+docker rm jovial_wozniak
+
+# enter an running container,
+docker attach cf0f3ca922e0
+
+# enter an running container with a new TTY
+docker exec -it cf0f3ca922e0 bash
+
+# leave the current container,
+#To detach the tty without exiting the shell, use the escape sequence Ctrl-p Ctrl-q.
+# docker run -t -i → can be detached with ^P^Qand reattached with docker attach
+# docker run -i → cannot be detached with ^P^Q; will disrupt stdin
+# docker run → cannot be detached with ^P^Q; can SIGKILL client; can reattach with docker attach
+
+#You can start a new container and give it a name using the --name switch.
+#You can also use the --rm switch to create a container that removes itself when it’s stopped.
+#See the docker run help command for more information on these options and others.
+
+# raname a docker container
+docker rename cur_container_name new_name
+
+###Step 7  Committing Changes in a Container to a Docker Image
+#commit the changes in a container to a new Docker image instance using the following command. (repository usually the docker_registry_username)
+docker commit -m "What you did to the image" -a "Author Name" container_id repository/new_image_name
+
+###Step 8  Pushing Docker Images to a Docker Repository
+# To push your image, first log into Docker Hub.
+docker login -u your-docker-registry-username
+
+# if your Docker registry username is different from the local username you used to create the image, you will have to tag your image with your registry username. For the example given in the last step, you would type:
+docker tag sammy/ubuntu-nodejs docker-registry-username/ubuntu-nodejs
+
+# Then you may push your own image using:
+docker push docker-registry-username/docker-image-name
+
+# one example for above
+docker push sammy/ubuntu-nodejs
+# now use :
+docker pull sammy/ubuntu-nodejs # to pull the image to a new machine and use it to run a new container.
+

@@ -6,3 +6,5 @@ https://medium.com/elucidata/deploying-a-flask-application-to-aws-elastic-beanst
 3. All the python dependencies should be placed in a file requirements.txt placed in the root folder of your code repository.
 4. You can include a .ebextensions folder in the root folder of your code repository and let it remain empty for the time being.
 
+and all logging.info() would be in /var/log/httpd/error_log
+can view the log content dynamically by: tail -f /var/log/httpd/error_log

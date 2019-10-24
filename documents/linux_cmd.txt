@@ -3,3 +3,8 @@ some common linux commands:
 sudo ps -ef | mysearchtext
 lsof -i :8831 | grep gunicorn
 sudo kill -9 PID
+
+#find the text with current folder in all files
+grep -iRl "ROMI_DATASET_GROUP_DEF_UPDATE" ./
+
+
