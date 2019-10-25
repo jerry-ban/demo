@@ -55,6 +55,8 @@ docker info
 
 #to check whether you can access and download images from Docker Hub, type:
 docker run hello-world
+docker run -it --name mydemo  ubuntu/readyimage
+docker run -it --name mydemo -p 8831:8831  ubuntu/readyimage
 
 #you can search for images available on Docker Hub by using the docker command with the search subcommand. For example, to search for the Ubuntu image, type:
 docker search ubuntu

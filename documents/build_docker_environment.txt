@@ -1,0 +1,8 @@
+
+apt install screen -y
+apt update
+apt install git -y
+apt install sudo
+useradd ubuntu
+groupadd ubuntu
+usermod -aG ubuntu ubuntu
