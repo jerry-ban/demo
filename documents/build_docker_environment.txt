@@ -1,8 +1,7 @@
 
-apt install screen -y
 apt update
-apt install git -y
-apt install sudo
+apt install -y git sudo lsof curl
+apt install screen -y
 useradd ubuntu
 groupadd ubuntu
 usermod -aG ubuntu ubuntu
